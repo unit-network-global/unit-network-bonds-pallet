@@ -1,0 +1,65 @@
+[package]
+name = "pallet-bonds"
+version = "4.0.0-dev"
+description = "Unit Staking Pallet."
+authors = ["Substrate DevHub <https://github.com/substrate-developer-hub>"]
+homepage = "https://substrate.io"
+edition = "2021"
+license = "Unlicense"
+publish = false
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = [
+	"derive",
+] }
+serde = { version = "1.0.106", features = ["derive"], optional = true }
+scale-info = { version = "2.1.1", default-features = false, features = ["derive"] }
+frame-benchmarking = { version = "4.0.0-dev", default-features = false, optional = true, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v1.0.0" }
+frame-support = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v1.0.0" }
+frame-system = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v1.0.0" }
+sp-std = { version = "8.0.0", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v1.0.0" }
+sp-runtime = { version = "24.0.0", default-features = false,  git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v1.0.0" }
+pallet-balances = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v1.0.0",  default-features = false, optional = true }
+pallet-timestamp = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v1.0.0",  default-features = false, optional = true }
+pallet-assets = { version = "4.0.0-dev", default-features = false, path = "../assets" }
+pallet-profile = { version = "4.0.0-dev", default-features = false, path = "../profile" }
+traits = { version = "4.0.0-dev", default-features = false, path = "../../traits" }
+pallet-subaccount = { version = "4.0.0-dev", default-features = false, path = "../subAccounts" }
+
+[dev-dependencies]
+sp-core = { version = "21.0.0", git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v1.0.0" }
+sp-io = { version = "23.0.0", git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v1.0.0" }
+pallet-treasury = { version = "4.0.0-dev", default-features = false, path = "../treasury" }
+pallet-bank = { version = "4.0.0-dev", default-features = false, path = "../bank" }
+pallet-pool = { version = "4.0.0-dev", default-features = false, path = "../pool" }
+pallet-oracle = { version = "4.0.0-dev", default-features = false, path = "../oracle" }
+
+[features]
+default = ["std"]
+std = [
+	"pallet-subaccount/std",
+	"traits/std",
+	"pallet-oracle/std",
+	"pallet-pool/std",
+	"pallet-treasury/std",
+	"pallet-bank/std",
+	"serde",
+	"codec/std",
+	"frame-benchmarking?/std",
+	"frame-support/std",
+	"frame-system/std",
+	"scale-info/std",
+	"sp-std/std",
+	"pallet-timestamp/std",
+	"pallet-balances/std",
+	"pallet-assets/std",
+	"pallet-profile/std"
+]
+runtime-benchmarks = [
+	"frame-benchmarking/runtime-benchmarks",
+	"sp-runtime/runtime-benchmarks",
+	]
+try-runtime = ["frame-support/try-runtime"]
